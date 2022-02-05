@@ -67,10 +67,10 @@ public class TeamController {
     @GetMapping("/{id}")
     @Transactional
     public ResponseEntity<TeamDto> findById(@PathVariable Long id) {
-        Optional<Team> team1 = teamRepository.findById(id);
+        Optional<Team> found = teamRepository.findById(id);
 
-        if (team1.isPresent()) {
-            Team team = team1.get();
+        if (found.isPresent()) {
+            Team team = found.get();
             TeamDto dto = new TeamDto();
             dto.setId(team.getId());
             dto.setName(team.getName());
