@@ -37,10 +37,12 @@ import static java.util.stream.Collectors.toList;
 public class TeamController {
     private final TeamRepository teamRepository;
     private final UserRepository userRepository;
+    private final TeamCommands teamCommands;
 
     public TeamController(TeamRepository teamRepository, UserRepository userRepository) {
         this.teamRepository = teamRepository;
         this.userRepository = userRepository;
+        teamCommands = new TeamCommands(teamRepository);
     }
 
     @GetMapping
@@ -69,7 +71,7 @@ public class TeamController {
 
     @PostMapping
     public ResponseEntity<Void> createTeam(@RequestBody TeamDto teamDto, UriComponentsBuilder uriComponentsBuilder) {
-        Optional<Long> id = createTeam(teamDto);
+        Optional<Long> id = teamCommands.create(teamDto);
 
         if (id.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -78,10 +80,6 @@ public class TeamController {
             headers.setLocation(uriComponentsBuilder.path("/team/{id}").buildAndExpand(id.get()).toUri());
             return new ResponseEntity<>(headers, HttpStatus.CREATED);
         }
-    }
-
-    private Optional<Long> createTeam(TeamDto teamDto) {
-        return new TeamCommands(teamRepository).create(teamDto);
     }
 
     @PutMapping("/{id}")
