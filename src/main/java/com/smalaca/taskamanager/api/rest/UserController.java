@@ -112,8 +112,7 @@ public class UserController {
         }
 
         if (userDto.getEmailAddress() != null) {
-            EmailAddress emailAddress = new EmailAddress();
-            emailAddress.setEmailAddress(userDto.getEmailAddress());
+            EmailAddress emailAddress = new EmailAddress(userDto.getEmailAddress());
             user.setEmailAddress(emailAddress);
         }
 
