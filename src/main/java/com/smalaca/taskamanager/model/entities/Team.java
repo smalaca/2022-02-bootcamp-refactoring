@@ -1,5 +1,6 @@
 package com.smalaca.taskamanager.model.entities;
 
+import com.smalaca.taskamanager.dto.TeamDto;
 import com.smalaca.taskamanager.model.embedded.Codename;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -34,6 +35,7 @@ public class Team {
     @ManyToOne
     private Project project;
 
+    @Deprecated
     public String getName() {
         return name;
     }
@@ -50,6 +52,7 @@ public class Team {
         this.members = new ArrayList<>(members);
     }
 
+    @Deprecated
     public List<User> getMembers() {
         return members;
     }
@@ -74,6 +77,7 @@ public class Team {
         this.codename = codename;
     }
 
+    @Deprecated
     public String getDescription() {
         return description;
     }
@@ -103,10 +107,10 @@ public class Team {
         Team team = (Team) o;
 
         return new EqualsBuilder()
-                .append(id, team.id)
-                .append(name, team.name)
-                .append(codename, team.codename)
-                .append(description, team.description)
+                .append(id, id)
+                .append(name, name)
+                .append(codename, codename)
+                .append(description, description)
                 .isEquals();
     }
 
@@ -121,19 +125,25 @@ public class Team {
                 .toHashCode();
     }
 
+    public TeamDto asDto() {
+        TeamDto dto = new TeamDto();
+        dto.setId(id);
+        dto.setName(name);
+
+        if (hasCodename()) {
+            dto.setCodename(codename.getShortName(), codename.getFullName());
+        }
+
+        dto.setDescription(description);
+        dto.setUserIds(getMemberIds());
+        return dto;
+    }
+
     public boolean hasCodename() {
         return codename != null;
     }
 
-    public String getCodenameShort() {
-        return codename.getShortName();
-    }
-
-    public String getCodenameFull() {
-        return codename.getFullName();
-    }
-
-    public List<Long> getMemberIds() {
+    private List<Long> getMemberIds() {
         return members.stream().map(User::getId).collect(toList());
     }
 }
