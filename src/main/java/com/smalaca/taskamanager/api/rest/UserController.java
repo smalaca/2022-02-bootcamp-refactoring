@@ -59,9 +59,8 @@ public class UserController {
                 userDto.setPhoneNumber(phoneNumber.getNumber());
             }
 
-            EmailAddress emailAddress = user.getEmailAddress();
-            if (emailAddress != null) {
-                userDto.setEmailAddress(emailAddress.getEmailAddress());
+            if (hasEmailAddress(user)) {
+                userDto.setEmailAddress(user.getEmailAddress().getEmailAddress());
             }
 
             usersDtos.add(userDto);
@@ -94,15 +93,18 @@ public class UserController {
                 userDto.setPhoneNumber(phoneNumber.getNumber());
             }
 
-            EmailAddress emailAddress = user.getEmailAddress();
-            if (emailAddress != null) {
-                userDto.setEmailAddress(emailAddress.getEmailAddress());
+            if (hasEmailAddress(user)) {
+                userDto.setEmailAddress(user.getEmailAddress().getEmailAddress());
             }
 
             return new ResponseEntity<>(userDto, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    private boolean hasEmailAddress(User user) {
+        return user.getEmailAddress() != null;
     }
 
     private boolean hasPhoneNumber(User user) {
@@ -193,9 +195,8 @@ public class UserController {
             response.setPhoneNumber(phoneNumber.getNumber());
         }
 
-        EmailAddress emailAddress = updated.getEmailAddress();
-        if (emailAddress != null) {
-            response.setEmailAddress(emailAddress.getEmailAddress());
+        if (hasEmailAddress(updated)) {
+            response.setEmailAddress(updated.getEmailAddress().getEmailAddress());
         }
 
         return new ResponseEntity<>(response, HttpStatus.OK);
