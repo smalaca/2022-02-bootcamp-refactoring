@@ -1,5 +1,6 @@
 package com.smalaca.taskamanager.model.entities;
 
+import com.smalaca.taskamanager.dto.UserDto;
 import com.smalaca.taskamanager.model.embedded.EmailAddress;
 import com.smalaca.taskamanager.model.embedded.PhoneNumber;
 import com.smalaca.taskamanager.model.embedded.UserName;
@@ -50,6 +51,7 @@ public class User {
         this.userName = userName;
     }
 
+    @Deprecated
     public String getLogin() {
         return login;
     }
@@ -58,6 +60,7 @@ public class User {
         this.login = login;
     }
 
+    @Deprecated
     public String getPassword() {
         return password;
     }
@@ -153,39 +156,38 @@ public class User {
                 .toHashCode();
     }
 
-    public boolean hasTeamRole() {
+    public UserDto asDto() {
+        UserDto userDto = new UserDto();
+        userDto.setId(id);
+        userDto.setFirstName(userName.getFirstName());
+        userDto.setLastName(userName.getLastName());
+        userDto.setLogin(login);
+        userDto.setPassword(password);
+
+        if (hasTeamRole()) {
+            userDto.setTeamRole(teamRole.name());
+        }
+
+        if (hasPhoneNumber()) {
+            userDto.setPhoneNumber(phoneNumber.getPrefix(), phoneNumber.getNumber());
+        }
+
+        if (hasEmailAddress()) {
+            userDto.setEmailAddress(emailAddress.getEmailAddress());
+        }
+
+        return userDto;
+    }
+
+    private boolean hasTeamRole() {
         return teamRole != null;
     }
 
-    public boolean hasPhoneNumber() {
+    private boolean hasPhoneNumber() {
         return phoneNumber != null;
     }
 
-    public boolean hasEmailAddress() {
+    private boolean hasEmailAddress() {
         return emailAddress != null;
-    }
-
-    public String emailAddress() {
-        return emailAddress.getEmailAddress();
-    }
-
-    public String firstName() {
-        return userName.getFirstName();
-    }
-
-    public String lastName() {
-        return userName.getLastName();
-    }
-
-    public String teamRole() {
-        return teamRole.name();
-    }
-
-    public String phonePrefix() {
-        return phoneNumber.getPrefix();
-    }
-
-    public String phoneNumber() {
-        return phoneNumber.getNumber();
     }
 }
