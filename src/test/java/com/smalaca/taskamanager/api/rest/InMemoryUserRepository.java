@@ -34,9 +34,7 @@ class InMemoryUserRepository implements UserRepository {
 
     private User aUser(long id, String firstName, String lastName, String login, TeamRole teamRole, String emailAddress, String phoneNumber) {
         User user = new User();
-        UserName userName = new UserName();
-        userName.setFirstName(firstName);
-        userName.setLastName(lastName);
+        UserName userName = new UserName(firstName, lastName);
         user.setUserName(userName);
         user.setLogin(login);
         user.setPassword(DUMMY_PASSWORD);

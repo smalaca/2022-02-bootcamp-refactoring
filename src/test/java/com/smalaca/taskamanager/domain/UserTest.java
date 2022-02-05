@@ -24,9 +24,7 @@ class UserTest {
         User user = new User();
         user.setLogin("antman");
         user.setPassword("4ntZ__Ru13Z");
-        UserName userName = new UserName();
-        userName.setFirstName("Scott");
-        userName.setLastName("Lang");
+        UserName userName = new UserName("Scott", "Lang");
         user.setUserName(userName);
         user.setTeamRole(TeamRole.DEVELOPER);
         PhoneNumber phoneNumber = new PhoneNumber();
@@ -142,9 +140,7 @@ class UserTest {
 
     private static User differentUser() {
         User user = new User();
-        UserName userName = new UserName();
-        userName.setFirstName("Peter");
-        userName.setLastName("Parker");
+        UserName userName = new UserName("Peter", "Parker");
         user.setUserName(userName);
         user.setLogin("spiderman");
         user.setPassword("responsibility");
@@ -162,9 +158,7 @@ class UserTest {
 
     private User user() {
         User user = new User();
-        UserName userName = new UserName();
-        userName.setFirstName("Wanda");
-        userName.setLastName("Maximoff");
+        UserName userName = new UserName("Wanda", "Maximoff");
         user.setUserName(userName);
         user.setLogin("Scarlet Witch");
         user.setPassword("qw3rty");

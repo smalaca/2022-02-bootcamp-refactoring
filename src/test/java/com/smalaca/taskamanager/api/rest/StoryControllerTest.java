@@ -657,9 +657,7 @@ class StoryControllerTest {
 
     private User user(long id, String firstName, String lastName, String email, String prefix, String number) {
         User user = withId(new User(), id);
-        UserName userName = new UserName();
-        userName.setFirstName(firstName);
-        userName.setLastName(lastName);
+        UserName userName = new UserName(firstName, lastName);
         user.setUserName(userName);
         EmailAddress emailAddress = new EmailAddress();
         emailAddress.setEmailAddress(email);

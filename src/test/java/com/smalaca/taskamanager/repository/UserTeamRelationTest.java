@@ -54,10 +54,7 @@ class UserTeamRelationTest {
 
     private User user(String firstName, String lastName) {
         User user = new User();
-        UserName userName = new UserName();
-        userName.setFirstName(firstName);
-        userName.setLastName(lastName);
-        user.setUserName(userName);
+        user.setUserName(new UserName(firstName, lastName));
         return user;
     }
 

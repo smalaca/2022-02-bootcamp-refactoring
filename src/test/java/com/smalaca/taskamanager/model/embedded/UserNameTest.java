@@ -53,9 +53,6 @@ class UserNameTest {
     }
 
     private static UserName userName(String firstName, String lastName) {
-        UserName userName = new UserName();
-        userName.setFirstName(firstName);
-        userName.setLastName(lastName);
-        return userName;
+        return new UserName(firstName, lastName);
     }
 }

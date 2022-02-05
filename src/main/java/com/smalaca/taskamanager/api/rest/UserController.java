@@ -69,9 +69,7 @@ public class UserController {
         } else {
             User user = new User();
             user.setTeamRole(TeamRole.valueOf(userDto.getTeamRole()));
-            UserName userName = new UserName();
-            userName.setFirstName(userDto.getFirstName());
-            userName.setLastName(userDto.getLastName());
+            UserName userName = new UserName(userDto.getFirstName(), userDto.getLastName());
             user.setUserName(userName);
             user.setLogin(userDto.getLogin());
             user.setPassword(userDto.getPassword());
