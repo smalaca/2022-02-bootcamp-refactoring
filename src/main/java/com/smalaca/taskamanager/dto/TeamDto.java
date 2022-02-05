@@ -1,8 +1,15 @@
 package com.smalaca.taskamanager.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class TeamDto {
     private Long id;
     private String name;
@@ -57,12 +64,9 @@ public class TeamDto {
         return userIds;
     }
 
-    public void setUserIds(List<Long> userIds) {
-        this.userIds = userIds;
-    }
-
-    public void setCodename(String codenameShort, String codenameFull) {
-        this.codenameShort = codenameShort;
-        this.codenameFull = codenameFull;
+    public static class TeamDtoBuilder {
+        public TeamDtoBuilder codename(String shortName, String fullName) {
+            return codenameShort(shortName).codenameFull(fullName);
+        }
     }
 }
