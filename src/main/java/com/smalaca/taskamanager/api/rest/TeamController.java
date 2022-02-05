@@ -50,7 +50,7 @@ public class TeamController {
                     dto.setId(team.getId());
                     dto.setName(team.getName());
 
-                    if (team.getCodename() != null) {
+                    if (hasCodename(team)) {
                         dto.setCodenameShort(team.getCodename().getShortName());
                         dto.setCodenameFull(team.getCodename().getFullName());
                     }
@@ -75,7 +75,7 @@ public class TeamController {
             dto.setId(team.getId());
             dto.setName(team.getName());
 
-            if (team.getCodename() != null) {
+            if (hasCodename(team)) {
                 dto.setCodenameShort(team.getCodename().getShortName());
                 dto.setCodenameFull(team.getCodename().getFullName());
             }
@@ -87,6 +87,10 @@ public class TeamController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    private boolean hasCodename(Team team) {
+        return team.getCodename() != null;
     }
 
     @PostMapping
@@ -134,7 +138,7 @@ public class TeamController {
         TeamDto dto = new TeamDto();
         dto.setId(updated.getId());
         dto.setName(updated.getName());
-        if (updated.getCodename() != null) {
+        if (hasCodename(updated)) {
             dto.setCodenameShort(updated.getCodename().getShortName());
             dto.setCodenameFull(updated.getCodename().getFullName());
         }
