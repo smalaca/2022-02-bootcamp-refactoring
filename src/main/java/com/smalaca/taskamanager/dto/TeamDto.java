@@ -31,6 +31,7 @@ public class TeamDto {
         return codenameShort;
     }
 
+    @Deprecated
     public void setCodenameShort(String codenameShort) {
         this.codenameShort = codenameShort;
     }
@@ -39,6 +40,7 @@ public class TeamDto {
         return codenameFull;
     }
 
+    @Deprecated
     public void setCodenameFull(String codenameFull) {
         this.codenameFull = codenameFull;
     }
