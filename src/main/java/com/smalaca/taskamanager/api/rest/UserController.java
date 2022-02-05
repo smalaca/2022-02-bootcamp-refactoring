@@ -44,21 +44,21 @@ public class UserController {
         for (User user : userRepository.findAll()) {
             UserDto userDto = new UserDto();
             userDto.setId(user.getId());
-            userDto.setFirstName(getFirstName(user));
-            userDto.setLastName(getLastName(user));
+            userDto.setFirstName(user.firstName());
+            userDto.setLastName(user.lastName());
             userDto.setLogin(user.getLogin());
             userDto.setPassword(user.getPassword());
 
             if (user.hasTeamRole()) {
-                userDto.setTeamRole(getTeamRole(user));
+                userDto.setTeamRole(user.teamRole());
             }
 
             if (user.hasPhoneNumber()) {
-                userDto.setPhoneNumber(getPhonePrefix(user), getPhoneNumber(user));
+                userDto.setPhoneNumber(user.phonePrefix(), user.phoneNumber());
             }
 
             if (user.hasEmailAddress()) {
-                userDto.setEmailAddress(getEmailAddress(user));
+                userDto.setEmailAddress(user.emailAddress());
             }
 
             usersDtos.add(userDto);
@@ -76,51 +76,27 @@ public class UserController {
 
             UserDto userDto = new UserDto();
             userDto.setId(user.getId());
-            userDto.setFirstName(getFirstName(user));
-            userDto.setLastName(getLastName(user));
+            userDto.setFirstName(user.firstName());
+            userDto.setLastName(user.lastName());
             userDto.setLogin(user.getLogin());
             userDto.setPassword(user.getPassword());
 
             if (user.hasTeamRole()) {
-                userDto.setTeamRole(getTeamRole(user));
+                userDto.setTeamRole(user.teamRole());
             }
 
             if (user.hasPhoneNumber()) {
-                userDto.setPhoneNumber(getPhonePrefix(user), getPhoneNumber(user));
+                userDto.setPhoneNumber(user.phonePrefix(), user.phoneNumber());
             }
 
             if (user.hasEmailAddress()) {
-                userDto.setEmailAddress(getEmailAddress(user));
+                userDto.setEmailAddress(user.emailAddress());
             }
 
             return new ResponseEntity<>(userDto, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
-
-    private String getPhoneNumber(User user) {
-        return user.getPhoneNumber().getNumber();
-    }
-
-    private String getPhonePrefix(User user) {
-        return user.getPhoneNumber().getPrefix();
-    }
-
-    private String getTeamRole(User user) {
-        return user.getTeamRole().name();
-    }
-
-    private String getLastName(User user) {
-        return user.getUserName().getLastName();
-    }
-
-    private String getFirstName(User user) {
-        return user.getUserName().getFirstName();
-    }
-
-    private String getEmailAddress(User updated) {
-        return updated.getEmailAddress().getEmailAddress();
     }
 
     @PostMapping
@@ -188,21 +164,21 @@ public class UserController {
 
         UserDto response = new UserDto();
         response.setId(updated.getId());
-        response.setFirstName(getFirstName(updated));
-        response.setLastName(getLastName(updated));
+        response.setFirstName(updated.firstName());
+        response.setLastName(updated.lastName());
         response.setLogin(updated.getLogin());
         response.setPassword(updated.getPassword());
 
         if (updated.hasTeamRole()) {
-            response.setTeamRole(getTeamRole(updated));
+            response.setTeamRole(updated.teamRole());
         }
 
         if (updated.hasPhoneNumber()) {
-            response.setPhoneNumber(getPhonePrefix(updated), getPhoneNumber(updated));
+            response.setPhoneNumber(updated.phonePrefix(), updated.phoneNumber());
         }
 
         if (updated.hasEmailAddress()) {
-            response.setEmailAddress(getEmailAddress(updated));
+            response.setEmailAddress(updated.emailAddress());
         }
 
         return new ResponseEntity<>(response, HttpStatus.OK);
