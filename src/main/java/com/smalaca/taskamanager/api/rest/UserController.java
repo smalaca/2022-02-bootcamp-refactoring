@@ -53,8 +53,8 @@ public class UserController {
                 userDto.setTeamRole(user.getTeamRole().name());
             }
 
-            PhoneNumber phoneNumber = user.getPhoneNumber();
-            if (phoneNumber != null) {
+            if (hasPhoneNumber(user)) {
+                PhoneNumber phoneNumber = user.getPhoneNumber();
                 userDto.setPhonePrefix(phoneNumber.getPrefix());
                 userDto.setPhoneNumber(phoneNumber.getNumber());
             }
@@ -88,8 +88,8 @@ public class UserController {
                 userDto.setTeamRole(user.getTeamRole().name());
             }
 
-            PhoneNumber phoneNumber = user.getPhoneNumber();
-            if (phoneNumber != null) {
+            if (hasPhoneNumber(user)) {
+                PhoneNumber phoneNumber = user.getPhoneNumber();
                 userDto.setPhonePrefix(phoneNumber.getPrefix());
                 userDto.setPhoneNumber(phoneNumber.getNumber());
             }
@@ -103,6 +103,10 @@ public class UserController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    private boolean hasPhoneNumber(User user) {
+        return user.getPhoneNumber() != null;
     }
 
     private boolean hasTeamRole(User user) {
@@ -183,8 +187,8 @@ public class UserController {
             response.setTeamRole(updated.getTeamRole().name());
         }
 
-        PhoneNumber phoneNumber = updated.getPhoneNumber();
-        if (phoneNumber != null) {
+        if (hasPhoneNumber(updated)) {
+            PhoneNumber phoneNumber = updated.getPhoneNumber();
             response.setPhonePrefix(phoneNumber.getPrefix());
             response.setPhoneNumber(phoneNumber.getNumber());
         }
