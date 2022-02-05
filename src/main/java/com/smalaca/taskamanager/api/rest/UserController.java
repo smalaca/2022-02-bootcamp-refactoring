@@ -44,21 +44,21 @@ public class UserController {
         for (User user : userRepository.findAll()) {
             UserDto userDto = new UserDto();
             userDto.setId(user.getId());
-            userDto.setFirstName(user.getUserName().getFirstName());
-            userDto.setLastName(user.getUserName().getLastName());
+            userDto.setFirstName(getFirstName(user));
+            userDto.setLastName(getLastName(user));
             userDto.setLogin(user.getLogin());
             userDto.setPassword(user.getPassword());
 
             if (user.hasTeamRole()) {
-                userDto.setTeamRole(user.getTeamRole().name());
+                userDto.setTeamRole(getTeamRole(user));
             }
 
             if (user.hasPhoneNumber()) {
-                userDto.setPhoneNumber(user.getPhoneNumber().getPrefix(), user.getPhoneNumber().getNumber());
+                userDto.setPhoneNumber(getPhonePrefix(user), getPhoneNumber(user));
             }
 
             if (user.hasEmailAddress()) {
-                userDto.setEmailAddress(user.getEmailAddress().getEmailAddress());
+                userDto.setEmailAddress(getEmailAddress(user));
             }
 
             usersDtos.add(userDto);
@@ -76,27 +76,51 @@ public class UserController {
 
             UserDto userDto = new UserDto();
             userDto.setId(user.getId());
-            userDto.setFirstName(user.getUserName().getFirstName());
-            userDto.setLastName(user.getUserName().getLastName());
+            userDto.setFirstName(getFirstName(user));
+            userDto.setLastName(getLastName(user));
             userDto.setLogin(user.getLogin());
             userDto.setPassword(user.getPassword());
 
             if (user.hasTeamRole()) {
-                userDto.setTeamRole(user.getTeamRole().name());
+                userDto.setTeamRole(getTeamRole(user));
             }
 
             if (user.hasPhoneNumber()) {
-                userDto.setPhoneNumber(user.getPhoneNumber().getPrefix(), user.getPhoneNumber().getNumber());
+                userDto.setPhoneNumber(getPhonePrefix(user), getPhoneNumber(user));
             }
 
             if (user.hasEmailAddress()) {
-                userDto.setEmailAddress(user.getEmailAddress().getEmailAddress());
+                userDto.setEmailAddress(getEmailAddress(user));
             }
 
             return new ResponseEntity<>(userDto, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    private String getPhoneNumber(User user) {
+        return user.getPhoneNumber().getNumber();
+    }
+
+    private String getPhonePrefix(User user) {
+        return user.getPhoneNumber().getPrefix();
+    }
+
+    private String getTeamRole(User user) {
+        return user.getTeamRole().name();
+    }
+
+    private String getLastName(User user) {
+        return user.getUserName().getLastName();
+    }
+
+    private String getFirstName(User user) {
+        return user.getUserName().getFirstName();
+    }
+
+    private String getEmailAddress(User updated) {
+        return updated.getEmailAddress().getEmailAddress();
     }
 
     @PostMapping
@@ -164,21 +188,21 @@ public class UserController {
 
         UserDto response = new UserDto();
         response.setId(updated.getId());
-        response.setFirstName(updated.getUserName().getFirstName());
-        response.setLastName(updated.getUserName().getLastName());
+        response.setFirstName(getFirstName(updated));
+        response.setLastName(getLastName(updated));
         response.setLogin(updated.getLogin());
         response.setPassword(updated.getPassword());
 
         if (updated.hasTeamRole()) {
-            response.setTeamRole(updated.getTeamRole().name());
+            response.setTeamRole(getTeamRole(updated));
         }
 
         if (updated.hasPhoneNumber()) {
-            response.setPhoneNumber(updated.getPhoneNumber().getPrefix(), updated.getPhoneNumber().getNumber());
+            response.setPhoneNumber(getPhonePrefix(updated), getPhoneNumber(updated));
         }
 
         if (updated.hasEmailAddress()) {
-            response.setEmailAddress(updated.getEmailAddress().getEmailAddress());
+            response.setEmailAddress(getEmailAddress(updated));
         }
 
         return new ResponseEntity<>(response, HttpStatus.OK);
