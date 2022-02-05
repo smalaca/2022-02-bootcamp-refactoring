@@ -1,5 +1,8 @@
 package com.smalaca.taskamanager.dto;
 
+import lombok.Getter;
+
+@Getter
 public class UserDto {
     private Long id;
     private String firstName;
@@ -11,24 +14,12 @@ public class UserDto {
     private String emailAddress;
     private String teamRole;
 
-    public String getFirstName() {
-        return firstName;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getLogin() {
-        return login;
     }
 
     public void setLogin(String login) {
@@ -39,20 +30,8 @@ public class UserDto {
         this.id = id;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
     }
 
     @Deprecated
@@ -65,24 +44,12 @@ public class UserDto {
         phoneNumber = number;
     }
 
-    public String getPhonePrefix() {
-        return phonePrefix;
-    }
-
     public void setPhonePrefix(String phonePrefix) {
         this.phonePrefix = phonePrefix;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
-    }
-
-    public String getTeamRole() {
-        return teamRole;
     }
 
     public void setTeamRole(String teamRole) {
