@@ -49,9 +49,8 @@ public class UserController {
             userDto.setLogin(user.getLogin());
             userDto.setPassword(user.getPassword());
 
-            TeamRole teamRole = user.getTeamRole();
-            if (teamRole != null) {
-                userDto.setTeamRole(teamRole.name());
+            if (hasTeamRole(user)) {
+                userDto.setTeamRole(user.getTeamRole().name());
             }
 
             PhoneNumber phoneNumber = user.getPhoneNumber();
@@ -85,9 +84,8 @@ public class UserController {
             userDto.setLogin(user.getLogin());
             userDto.setPassword(user.getPassword());
 
-            TeamRole teamRole = user.getTeamRole();
-            if (teamRole != null) {
-                userDto.setTeamRole(teamRole.name());
+            if (hasTeamRole(user)) {
+                userDto.setTeamRole(user.getTeamRole().name());
             }
 
             PhoneNumber phoneNumber = user.getPhoneNumber();
@@ -105,6 +103,10 @@ public class UserController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    private boolean hasTeamRole(User user) {
+        return user.getTeamRole() != null;
     }
 
     @PostMapping
@@ -177,9 +179,8 @@ public class UserController {
         response.setLogin(updated.getLogin());
         response.setPassword(updated.getPassword());
 
-        TeamRole teamRole = updated.getTeamRole();
-        if (teamRole != null) {
-            response.setTeamRole(teamRole.name());
+        if (hasTeamRole(updated)) {
+            response.setTeamRole(updated.getTeamRole().name());
         }
 
         PhoneNumber phoneNumber = updated.getPhoneNumber();
