@@ -49,17 +49,17 @@ public class UserController {
             userDto.setLogin(user.getLogin());
             userDto.setPassword(user.getPassword());
 
-            if (hasTeamRole(user)) {
+            if (user.hasTeamRole()) {
                 userDto.setTeamRole(user.getTeamRole().name());
             }
 
-            if (hasPhoneNumber(user)) {
+            if (user.hasPhoneNumber()) {
                 PhoneNumber phoneNumber = user.getPhoneNumber();
                 userDto.setPhonePrefix(phoneNumber.getPrefix());
                 userDto.setPhoneNumber(phoneNumber.getNumber());
             }
 
-            if (hasEmailAddress(user)) {
+            if (user.hasEmailAddress()) {
                 userDto.setEmailAddress(user.getEmailAddress().getEmailAddress());
             }
 
@@ -83,17 +83,17 @@ public class UserController {
             userDto.setLogin(user.getLogin());
             userDto.setPassword(user.getPassword());
 
-            if (hasTeamRole(user)) {
+            if (user.hasTeamRole()) {
                 userDto.setTeamRole(user.getTeamRole().name());
             }
 
-            if (hasPhoneNumber(user)) {
+            if (user.hasPhoneNumber()) {
                 PhoneNumber phoneNumber = user.getPhoneNumber();
                 userDto.setPhonePrefix(phoneNumber.getPrefix());
                 userDto.setPhoneNumber(phoneNumber.getNumber());
             }
 
-            if (hasEmailAddress(user)) {
+            if (user.hasEmailAddress()) {
                 userDto.setEmailAddress(user.getEmailAddress().getEmailAddress());
             }
 
@@ -101,18 +101,6 @@ public class UserController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
-
-    private boolean hasEmailAddress(User user) {
-        return user.getEmailAddress() != null;
-    }
-
-    private boolean hasPhoneNumber(User user) {
-        return user.getPhoneNumber() != null;
-    }
-
-    private boolean hasTeamRole(User user) {
-        return user.getTeamRole() != null;
     }
 
     @PostMapping
@@ -185,17 +173,17 @@ public class UserController {
         response.setLogin(updated.getLogin());
         response.setPassword(updated.getPassword());
 
-        if (hasTeamRole(updated)) {
+        if (updated.hasTeamRole()) {
             response.setTeamRole(updated.getTeamRole().name());
         }
 
-        if (hasPhoneNumber(updated)) {
+        if (updated.hasPhoneNumber()) {
             PhoneNumber phoneNumber = updated.getPhoneNumber();
             response.setPhonePrefix(phoneNumber.getPrefix());
             response.setPhoneNumber(phoneNumber.getNumber());
         }
 
-        if (hasEmailAddress(updated)) {
+        if (updated.hasEmailAddress()) {
             response.setEmailAddress(updated.getEmailAddress().getEmailAddress());
         }
 
