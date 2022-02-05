@@ -70,8 +70,7 @@ class TeamControllerTest {
     @Test
     void shouldInformAboutConflictWhenCreatedTeamAlreadyExists() {
         UriComponentsBuilder uriComponentsBuilder = null;
-        TeamDto existing = new TeamDto();
-        existing.setName(EXISTING_TEAM_NAME);
+        TeamDto existing = TeamDto.builder().name(EXISTING_TEAM_NAME).build();
 
         ResponseEntity<Void> response = controller.createTeam(existing, uriComponentsBuilder);
 
@@ -80,8 +79,7 @@ class TeamControllerTest {
 
     @Test
     void shouldCreateTeam() {
-        TeamDto teamDto = new TeamDto();
-        teamDto.setName("Invaders");
+        TeamDto teamDto = TeamDto.builder().name("Invaders").build();
         UriComponentsBuilder uriComponentsBuilder = fromUriString("/");
 
         ResponseEntity<Void> response = controller.createTeam(teamDto, uriComponentsBuilder);
@@ -107,7 +105,7 @@ class TeamControllerTest {
 
     @Test
     void shouldNotUpdateAnythingWhenNoChangesSend() {
-        ResponseEntity<TeamDto> response = controller.updateTeam(EXISTING_TEAM_ID, new TeamDto());
+        ResponseEntity<TeamDto> response = controller.updateTeam(EXISTING_TEAM_ID, TeamDto.builder().build());
 
         assertThat(response.getStatusCode()).isEqualTo(OK);
         assertTeam(controller.findById(EXISTING_TEAM_ID).getBody());
@@ -128,11 +126,11 @@ class TeamControllerTest {
         String newCodenameShort = randomString();
         String newCodenameFull = randomString();
         String newDescription = randomString();
-        TeamDto dto = new TeamDto();
-        dto.setName(newName);
-        dto.setCodenameShort(newCodenameShort);
-        dto.setCodenameFull(newCodenameFull);
-        dto.setDescription(newDescription);
+        TeamDto dto = TeamDto.builder()
+                .name(newName)
+                .codename(newCodenameShort, newCodenameFull)
+                .description(newDescription)
+                .build();
 
         ResponseEntity<TeamDto> response = controller.updateTeam(EXISTING_TEAM_ID, dto);
 
