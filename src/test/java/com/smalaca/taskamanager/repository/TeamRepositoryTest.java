@@ -68,9 +68,7 @@ class TeamRepositoryTest {
     private Team team(String name, String codenameShort, String codenameFull, String description) {
         Team team = new Team();
         team.setName(name);
-        Codename codename = new Codename();
-        codename.setShortName(codenameShort);
-        codename.setFullName(codenameFull);
+        Codename codename = new Codename(codenameShort, codenameFull);
         team.setCodename(codename);
         team.setDescription(description);
         return team;
