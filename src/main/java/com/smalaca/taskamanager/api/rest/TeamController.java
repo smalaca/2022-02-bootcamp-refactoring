@@ -10,6 +10,7 @@ import com.smalaca.taskamanager.model.entities.Team;
 import com.smalaca.taskamanager.model.entities.User;
 import com.smalaca.taskamanager.repository.TeamRepository;
 import com.smalaca.taskamanager.repository.UserRepository;
+import com.smalaca.taskmanager.team.command.TeamCommands;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -80,16 +81,7 @@ public class TeamController {
     }
 
     private Optional<Long> createTeam(TeamDto teamDto) {
-        Optional<Team> found = teamRepository.findByName(teamDto.getName());
-
-        if (found.isEmpty()) {
-            Team team = new Team();
-            team.setName(teamDto.getName());
-            Team saved = teamRepository.save(team);
-            return Optional.of(saved.getId());
-        } else {
-            return Optional.empty();
-        }
+        return new TeamCommands(teamRepository).create(teamDto);
     }
 
     @PutMapping("/{id}")
