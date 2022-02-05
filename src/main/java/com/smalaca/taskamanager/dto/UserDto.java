@@ -55,8 +55,14 @@ public class UserDto {
         return phoneNumber;
     }
 
+    @Deprecated
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public void setPhoneNumber(String prefix, String number) {
+        phonePrefix = prefix;
+        phoneNumber = number;
     }
 
     public String getPhonePrefix() {
