@@ -58,4 +58,9 @@ public class TeamDto {
     public void setUserIds(List<Long> userIds) {
         this.userIds = userIds;
     }
+
+    public void setCodename(String codenameShort, String codenameFull) {
+        this.codenameShort = codenameShort;
+        this.codenameFull = codenameFull;
+    }
 }
