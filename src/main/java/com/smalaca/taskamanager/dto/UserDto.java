@@ -1,8 +1,14 @@
 package com.smalaca.taskamanager.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
     private Long id;
     private String firstName;
@@ -54,5 +60,11 @@ public class UserDto {
 
     public void setTeamRole(String teamRole) {
         this.teamRole = teamRole;
+    }
+
+    public static class UserDtoBuilder {
+        public UserDtoBuilder phone(String prefix, String number) {
+            return phonePrefix(prefix).phoneNumber(number);
+        }
     }
 }
